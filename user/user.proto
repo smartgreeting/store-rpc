@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "user";
+
+
+
+
+
+
+message getSmsReq {
+  string phone = 1;
+}
+
+
+message UserReply {
+   string smsCode = 1;
+   
+  }
+
+
+
+
+service User {
+  // 获取短信验证码
+  rpc getSms(getSmsReq) returns(UserReply);
+}
