@@ -36,9 +36,10 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.UserReply, error) 
 	if smsCode != in.SmsCode {
 		return nil, errors.New("验证不正确")
 	}
-	u, err := l.userDao.Create(&models.User{
+	res, err := l.userDao.Create(&models.User{
 		Phone:    in.Phone,
 		Password: in.Password,
+		Username: in.Phone,
 	})
 
 	if err != nil {
@@ -46,6 +47,6 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.UserReply, error) 
 	}
 
 	return &user.UserReply{
-		Id: u.ID,
+		Id: res.ID,
 	}, nil
 }

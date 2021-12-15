@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 20:56:34
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-14 21:53:30
+ * @LastEditTime: 2021-12-15 21:33:02
  * @Email: 17719495105@163.com
  */
 package logic
@@ -38,15 +38,15 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 //  用户登陆
 func (l *LoginLogic) Login(in *user.LoginReq) (*user.UserReply, error) {
 
-	u, err := l.userDao.FindByPhone(in.Phone)
+	res, err := l.userDao.FindByPhone(in.Phone)
 
 	switch err {
 	case nil:
-		if u.Password != in.Password {
+		if res.Password != in.Password {
 			return nil, errors.New("密码错误")
 		}
 		return &user.UserReply{
-			Id: u.ID,
+			Id: res.ID,
 		}, nil
 	case gorm.ErrRecordNotFound:
 		return nil, errors.New("未匹配到记录")

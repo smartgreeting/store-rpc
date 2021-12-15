@@ -12,4 +12,4 @@ Redis:
   Port: 6379
   DB: 1
 Sms:
-  ExpireTime: 5
+  ExpireTime: 60

@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 21:11:59
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-14 21:52:42
+ * @LastEditTime: 2021-12-15 22:44:00
  * @Email: 17719495105@163.com
  */
 package dao
@@ -31,10 +31,25 @@ func (u UserDao) Create(user *models.User) (*models.User, error) {
 	return user, err
 }
 
-func (d UserDao) FindByPhone(phone string) (*models.User, error) {
+func (u UserDao) FindByPhone(phone string) (*models.User, error) {
 	var user models.User
 
-	err := d.db.Where("phone = ?", phone).First(&user).Error
+	err := u.db.Where("phone = ? AND deleted = ?", phone, 0).First(&user).Error
 
 	return &user, err
+}
+
+func (u UserDao) FindUserInfoById(id uint64) (*models.User, error) {
+	var user models.User
+
+	err := u.db.Where("id = ? AND deleted = ?", id, 0).First(&user).Error
+
+	return &user, err
+}
+
+func (u UserDao) UpdateUserInfo(user *models.User) error {
+
+	err := u.db.Model(&models.User{}).Where("id = ? AND deleted = ?", user.ID, 0).Updates(&user).Error
+
+	return err
 }

@@ -3,7 +3,7 @@ create table `hc_user`(
     `username` varchar(32) not null default "" comment "用户名",
     `password` varchar(128) not null comment "密码",
     `avatar` varchar(128) not null default "" comment "头像地址",
-    `gender` tinyint(1) not null default 0 comment "性别：1.男 2.女",
+    `gender` tinyint(1) not null default 1 comment "性别：1.男 2.女",
     `phone` varchar(11) not null default "" comment "手机号",
     `email` varchar(64) comment "邮箱",
     `address` varchar(64) comment "地址",

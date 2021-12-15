@@ -2,13 +2,13 @@
  * @Author: lihuan
  * @Date: 2021-12-14 20:22:15
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-14 21:44:29
+ * @LastEditTime: 2021-12-15 22:51:33
  * @Email: 17719495105@163.com
  */
 package models
 
 type User struct {
-	ID        int64
+	ID        uint64
 	Username  string
 	Password  string
 	Avatar    string

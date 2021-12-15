@@ -25,7 +25,7 @@ message getUserInfoReq {
   uint64 id = 1;
 }
 message updateUserInfoReq {
-  int64 id = 1;
+  uint64 id = 1;
   string username = 2;
   string password = 3;
   string   avatar = 4;
@@ -39,7 +39,7 @@ message updateUserInfoReq {
 }
 message UserReply {
   string smsCode = 1;
-  int64 id = 2;
+  uint64 id = 2;
   string username = 3;
   string password = 4;
   string   avatar = 5;
