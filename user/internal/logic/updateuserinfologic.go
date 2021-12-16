@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 20:56:34
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-15 22:56:16
+ * @LastEditTime: 2021-12-16 21:38:16
  * @Email: 17719495105@163.com
  */
 package logic
@@ -15,6 +15,7 @@ import (
 	"github.com/smartgreeting/store-rpc/user/internal/svc"
 	"github.com/smartgreeting/store-rpc/user/models"
 	"github.com/smartgreeting/store-rpc/user/user"
+	"gorm.io/gorm"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -48,10 +49,14 @@ func (l *UpdateUserInfoLogic) UpdateUserInfo(in *user.UpdateUserInfoReq) (*user.
 		Hobbies:   in.Hobbies,
 		UpdatedAt: in.UpdatedAt,
 	})
-	if err != nil {
+
+	switch err {
+	case nil:
+		return &user.UserReply{}, nil
+	case gorm.ErrRecordNotFound:
+		return nil, errors.New("未匹配到记录")
+	default:
 		return nil, errors.New("更新用户信息失败")
 	}
-	res, _ := l.userDao.FindUserInfoById(in.Id)
 
-	return MapToUserInfo(res), nil
 }
