@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 20:56:34
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-15 21:31:42
+ * @LastEditTime: 2021-12-16 22:30:40
  * @Email: 17719495105@163.com
  */
 package logic
@@ -11,7 +11,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/smartgreeting/store-rpc/user/internal/dao"
 	"github.com/smartgreeting/store-rpc/user/internal/svc"
 	"github.com/smartgreeting/store-rpc/user/models"
 	"github.com/smartgreeting/store-rpc/user/user"
@@ -24,21 +23,19 @@ type GetUserInfoLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
-	userDao *dao.UserDao
 }
 
 func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserInfoLogic {
 	return &GetUserInfoLogic{
-		ctx:     ctx,
-		svcCtx:  svcCtx,
-		Logger:  logx.WithContext(ctx),
-		userDao: dao.NewUserDao(ctx, svcCtx.DB),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
 	}
 }
 
 //  获取用户信息
 func (l *GetUserInfoLogic) GetUserInfo(in *user.GetUserInfoReq) (*user.UserReply, error) {
-	res, err := l.userDao.FindUserInfoById(in.Id)
+	res, err := l.svcCtx.UserDao.FindUserInfoById(in.Id)
 
 	switch err {
 	case nil:

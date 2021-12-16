@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 20:56:34
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-15 21:33:02
+ * @LastEditTime: 2021-12-16 22:31:45
  * @Email: 17719495105@163.com
  */
 package logic
@@ -11,7 +11,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/smartgreeting/store-rpc/user/internal/dao"
 	"github.com/smartgreeting/store-rpc/user/internal/svc"
 	"github.com/smartgreeting/store-rpc/user/user"
 	"gorm.io/gorm"
@@ -23,22 +22,20 @@ type LoginLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
-	userDao *dao.UserDao
 }
 
 func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic {
 	return &LoginLogic{
-		ctx:     ctx,
-		svcCtx:  svcCtx,
-		Logger:  logx.WithContext(ctx),
-		userDao: dao.NewUserDao(ctx, svcCtx.DB),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
 	}
 }
 
 //  用户登陆
 func (l *LoginLogic) Login(in *user.LoginReq) (*user.UserReply, error) {
 
-	res, err := l.userDao.FindByPhone(in.Phone)
+	res, err := l.svcCtx.UserDao.FindByPhone(in.Phone)
 
 	switch err {
 	case nil:

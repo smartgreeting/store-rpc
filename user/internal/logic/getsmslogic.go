@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 21:10:21
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-13 21:14:21
+ * @LastEditTime: 2021-12-16 22:34:34
  * @Email: 17719495105@163.com
  */
 package logic
@@ -40,7 +40,7 @@ func (l *GetSmsLogic) GetSms(in *user.GetSmsReq) (*user.UserReply, error) {
 
 	key := fmt.Sprintf("GetSms%s", in.Phone)
 	code := genCode(6)
-	err := l.svcCtx.RedCli.Set(key, code, time.Duration(l.svcCtx.Config.Sms.ExpireTime)*time.Minute).Err()
+	err := l.svcCtx.RedisDB.Setex(key, code, l.svcCtx.Config.Sms.ExpireTime*60)
 	if err != nil {
 		return nil, errors.New("生成验证码失败")
 	}

@@ -7,9 +7,9 @@ Etcd:
 Mysql:
   Dns: root:lihuan321..@tcp(127.0.0.1:3306)/store?charset=utf8mb4&parseTime=True&loc=Local
 
-Redis:
-  Host: 127.0.0.1
-  Port: 6379
-  DB: 1
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Pass: ""
+    Type: node
 Sms:
   ExpireTime: 60

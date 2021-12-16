@@ -9,7 +9,7 @@ create table `hc_user`(
     `address` varchar(64) comment "地址",
     `hobbies` varchar(128) comment "爱好",
     `deleted` tinyint(1) not null default 0 comment "是否注销",
-    `created_at` int(16) comment "创建时间",
-    `updated_at` int(16) comment "更新时间",
+    `created_at` int(32) comment "创建时间",
+    `updated_at` int(32) comment "更新时间",
     primary key (`id`) using BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='商城用户表';
