@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 21:10:21
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-14 20:17:05
+ * @LastEditTime: 2021-12-19 16:54:22
  * @Email: 17719495105@163.com
  */
 package main
@@ -36,7 +36,6 @@ func main() {
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user.RegisterUserServer(grpcServer, srv)
 		// 注册grpcui
-		reflection.Register(grpcServer)
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

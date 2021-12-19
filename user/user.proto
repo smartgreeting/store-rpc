@@ -9,48 +9,45 @@ option go_package = "user";
 
 
 
-message getSmsReq {
+message GetSmsReq {
   string phone = 1;
 }
-message registerReq {
+message RegisterReq {
   string phone = 1;
   string password = 2;
   string smsCode = 3;
 }
-message loginReq {
+message LoginReq {
   string phone = 1;
   string password = 2;
 }
-message getUserInfoReq {
-  uint64 id = 1;
+message GetUserInfoReq {
+  int64 id = 1;
 }
-message updateUserInfoReq {
-  uint64 id = 1;
+message UpdateUserInfoReq {
+  int64 id = 1;
   string username = 2;
   string password = 3;
-  string   avatar = 4;
-  int32 gender = 5; // 1 男  2女
+  string avatar = 4;
+  int32  gender = 5; // 1 男  2女
   string phone = 6;
   string email = 7;
   string address = 8;
   string hobbies = 9;
-  int32 deleted = 10;
-  int32 updatedAt = 11;
 }
 message UserReply {
   string smsCode = 1;
-  uint64 id = 2;
+  int64 id = 2;
   string username = 3;
   string password = 4;
-  string   avatar = 5;
-  int32 gender = 6; // 1 男  2女
+  string avatar = 5;
+  int32  gender = 6; // 1 男  2女
   string phone = 7;
   string email = 8;
   string address = 9;
   string hobbies = 10;
-  int32 deleted = 11;
-  int32 createdAt = 12;
-  int32 updatedAt = 13;
+  int32  createdAt = 11;
+  int32  updatedAt = 12;
   }
 
 
@@ -60,13 +57,13 @@ message UserReply {
 
 service User {
   // 获取短信验证码
-  rpc getSms(getSmsReq) returns(UserReply);
+  rpc getSms(GetSmsReq) returns(UserReply);
   // 用户注册
-  rpc register(registerReq) returns(UserReply);
+  rpc register(RegisterReq) returns(UserReply);
   // 用户登陆
-  rpc login(loginReq) returns(UserReply);
+  rpc login(LoginReq) returns(UserReply);
   // 获取用户信息
-  rpc getUserInfo(getUserInfoReq) returns(UserReply);
+  rpc getUserInfo(GetUserInfoReq) returns(UserReply);
   // 修改用户信息
-  rpc updateUserInfo(updateUserInfoReq)returns(UserReply);
+  rpc updateUserInfo(UpdateUserInfoReq)returns(UserReply);
 }

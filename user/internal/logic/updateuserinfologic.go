@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 20:56:34
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-16 22:32:12
+ * @LastEditTime: 2021-12-17 20:08:11
  * @Email: 17719495105@163.com
  */
 package logic
@@ -36,15 +36,14 @@ func NewUpdateUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 //  修改用户信息
 func (l *UpdateUserInfoLogic) UpdateUserInfo(in *user.UpdateUserInfoReq) (*user.UserReply, error) {
 	err := l.svcCtx.UserDao.UpdateUserInfo(&models.User{
-		ID:        in.Id,
-		Username:  in.Username,
-		Avatar:    in.Avatar,
-		Gender:    in.Gender,
-		Phone:     in.Phone,
-		Email:     in.Email,
-		Address:   in.Address,
-		Hobbies:   in.Hobbies,
-		UpdatedAt: in.UpdatedAt,
+		ID:       in.Id,
+		Username: in.Username,
+		Avatar:   in.Avatar,
+		Gender:   in.Gender,
+		Phone:    in.Phone,
+		Email:    in.Email,
+		Address:  in.Address,
+		Hobbies:  in.Hobbies,
 	})
 
 	switch err {

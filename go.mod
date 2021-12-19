@@ -3,7 +3,6 @@ module github.com/smartgreeting/store-rpc
 go 1.17
 
 require (
-	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/tal-tech/go-zero v1.2.4
 	google.golang.org/grpc v1.42.0
 	google.golang.org/protobuf v1.27.1
@@ -18,6 +17,7 @@ require (
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-logr/logr v0.2.0 // indirect
+	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/mock v1.6.0 // indirect
