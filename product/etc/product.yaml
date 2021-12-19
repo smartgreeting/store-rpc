@@ -1,0 +1,14 @@
+Name: product.rpc
+ListenOn: 127.0.0.1:8081
+Etcd:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: product.rpc
+Mode: dev
+Mysql:
+  Dns: root:lihuan321..@tcp(127.0.0.1:3306)/store?charset=utf8mb4&parseTime=True&loc=Local
+
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Pass: ""
+    Type: node
