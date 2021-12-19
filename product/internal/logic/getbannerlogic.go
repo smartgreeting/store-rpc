@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-18 12:48:16
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-19 16:39:25
+ * @LastEditTime: 2021-12-19 20:29:27
  * @Email: 17719495105@163.com
  */
 package logic
@@ -27,7 +27,7 @@ type GetBannerLogic struct {
 func BannerToBannerListResp(banner *models.Banner) *product.Banner {
 	return &product.Banner{
 		Id:        banner.ID,
-		ProductID: banner.ProductID,
+		ProductId: banner.ProductId,
 		Url:       banner.Url,
 		Order:     banner.Order,
 		CreatedAt: banner.CreatedAt,
