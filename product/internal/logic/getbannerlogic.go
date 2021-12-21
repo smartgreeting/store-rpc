@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-18 12:48:16
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-19 20:29:27
+ * @LastEditTime: 2021-12-21 20:23:01
  * @Email: 17719495105@163.com
  */
 package logic
@@ -44,7 +44,7 @@ func NewGetBannerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetBann
 
 //  获取轮播图
 func (l *GetBannerLogic) GetBanner(in *product.GetBannerReq) (*product.BannerReply, error) {
-	res, err := l.svcCtx.BannerDao.GetBanner()
+	res, err := l.svcCtx.ProductDao.GetBanner()
 
 	switch err {
 	case nil:

@@ -1,4 +1,8 @@
-CREATE TABLE  `hc_user`(
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+
+CREATE TABLE IF NOT EXISTS `hc_user`(
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `username` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
     `password` varchar(128) NOT NULL COMMENT '密码',

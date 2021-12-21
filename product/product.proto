@@ -6,9 +6,13 @@ option go_package="product";
 
 
 
-message getBannerReq {
+message GetBannerReq {
 
 }
+message GetProductReq {
+    int64 id = 1;   
+}
+message GetProductListReq {}
 message Banner {
     int64 id = 1;
     int64  productId = 2;
@@ -17,12 +21,36 @@ message Banner {
     int32 createdAt = 5;
     int32 updatedAt = 6;
 }
+message ProductReply {
+    int64 id = 1;
+    int64 detailId = 2;
+    int64 commentId = 3;
+    string url = 4;
+    string des = 5;
+    string name = 6;
+    string shortName = 7;
+    int32 type = 8;
+    string price = 9;
+    int64 sale = 10;
+    int64 inventory = 11;
+    string score = 12;
+    string discount = 13;
+    int32 createdAt = 14;
+    int32 updatedAt = 15;
+}
 message BannerReply {
     repeated Banner list = 1;
+}
+message ProductListReply {
+    repeated ProductReply list = 1;
 }
 service Product {
 
     // 获取轮播图
-    rpc getBanner (getBannerReq) returns(BannerReply);
+    rpc getBanner (GetBannerReq) returns(BannerReply);
+    //获取产品
+    rpc getProduct(GetProductReq)returns(ProductReply);
+    // 获取产品列表
+    rpc getProductList (GetProductListReq) returns(ProductListReply);
 }
 

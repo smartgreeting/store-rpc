@@ -13,13 +13,21 @@ import (
 )
 
 type (
-	Banner       = product.Banner
-	BannerReply  = product.BannerReply
-	GetBannerReq = product.GetBannerReq
+	Banner            = product.Banner
+	BannerReply       = product.BannerReply
+	GetBannerReq      = product.GetBannerReq
+	GetProductListReq = product.GetProductListReq
+	GetProductReq     = product.GetProductReq
+	ProductListReply  = product.ProductListReply
+	ProductReply      = product.ProductReply
 
 	Product interface {
 		//  获取轮播图
 		GetBanner(ctx context.Context, in *GetBannerReq, opts ...grpc.CallOption) (*BannerReply, error)
+		// 获取产品
+		GetProduct(ctx context.Context, in *GetProductReq, opts ...grpc.CallOption) (*ProductReply, error)
+		//  获取产品列表
+		GetProductList(ctx context.Context, in *GetProductListReq, opts ...grpc.CallOption) (*ProductListReply, error)
 	}
 
 	defaultProduct struct {
@@ -37,4 +45,16 @@ func NewProduct(cli zrpc.Client) Product {
 func (m *defaultProduct) GetBanner(ctx context.Context, in *GetBannerReq, opts ...grpc.CallOption) (*BannerReply, error) {
 	client := product.NewProductClient(m.cli.Conn())
 	return client.GetBanner(ctx, in, opts...)
+}
+
+// 获取产品
+func (m *defaultProduct) GetProduct(ctx context.Context, in *GetProductReq, opts ...grpc.CallOption) (*ProductReply, error) {
+	client := product.NewProductClient(m.cli.Conn())
+	return client.GetProduct(ctx, in, opts...)
+}
+
+//  获取产品列表
+func (m *defaultProduct) GetProductList(ctx context.Context, in *GetProductListReq, opts ...grpc.CallOption) (*ProductListReply, error) {
+	client := product.NewProductClient(m.cli.Conn())
+	return client.GetProductList(ctx, in, opts...)
 }

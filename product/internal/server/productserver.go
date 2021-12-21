@@ -26,3 +26,15 @@ func (s *ProductServer) GetBanner(ctx context.Context, in *product.GetBannerReq)
 	l := logic.NewGetBannerLogic(ctx, s.svcCtx)
 	return l.GetBanner(in)
 }
+
+// 获取产品
+func (s *ProductServer) GetProduct(ctx context.Context, in *product.GetProductReq) (*product.ProductReply, error) {
+	l := logic.NewGetProductLogic(ctx, s.svcCtx)
+	return l.GetProduct(in)
+}
+
+//  获取产品列表
+func (s *ProductServer) GetProductList(ctx context.Context, in *product.GetProductListReq) (*product.ProductListReply, error) {
+	l := logic.NewGetProductListLogic(ctx, s.svcCtx)
+	return l.GetProductList(in)
+}

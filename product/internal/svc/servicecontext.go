@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-18 12:48:16
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-19 15:46:51
+ * @LastEditTime: 2021-12-21 20:23:26
  * @Email: 17719495105@163.com
  */
 package svc
@@ -18,10 +18,10 @@ import (
 )
 
 type ServiceContext struct {
-	Config    config.Config
-	DB        *gorm.DB
-	RedisDB   *redis.Redis
-	BannerDao *dao.BannerDao
+	Config     config.Config
+	DB         *gorm.DB
+	RedisDB    *redis.Redis
+	ProductDao *dao.ProductDao
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -35,9 +35,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		panic(err)
 	}
 	return &ServiceContext{
-		Config:    c,
-		DB:        db,
-		RedisDB:   redisDB,
-		BannerDao: dao.NewBannerDao(context.TODO(), db),
+		Config:     c,
+		DB:         db,
+		RedisDB:    redisDB,
+		ProductDao: dao.NewProductDao(context.TODO(), db),
 	}
 }
