@@ -38,3 +38,21 @@ func (s *ProductServer) GetProductList(ctx context.Context, in *product.GetProdu
 	l := logic.NewGetProductListLogic(ctx, s.svcCtx)
 	return l.GetProductList(in)
 }
+
+//  新增产品
+func (s *ProductServer) IncrementProduct(ctx context.Context, in *product.ProductReq) (*product.IncrementProductReply, error) {
+	l := logic.NewIncrementProductLogic(ctx, s.svcCtx)
+	return l.IncrementProduct(in)
+}
+
+//  修改产品
+func (s *ProductServer) UpdateProduct(ctx context.Context, in *product.ProductReq) (*product.UpdateProductReply, error) {
+	l := logic.NewUpdateProductLogic(ctx, s.svcCtx)
+	return l.UpdateProduct(in)
+}
+
+//  删除商品
+func (s *ProductServer) DeleteProduct(ctx context.Context, in *product.DeleteProductReq) (*product.DeleteProductReply, error) {
+	l := logic.NewDeleteProductLogic(ctx, s.svcCtx)
+	return l.DeleteProduct(in)
+}

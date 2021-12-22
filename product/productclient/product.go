@@ -13,13 +13,18 @@ import (
 )
 
 type (
-	Banner            = product.Banner
-	BannerReply       = product.BannerReply
-	GetBannerReq      = product.GetBannerReq
-	GetProductListReq = product.GetProductListReq
-	GetProductReq     = product.GetProductReq
-	ProductListReply  = product.ProductListReply
-	ProductReply      = product.ProductReply
+	Banner                = product.Banner
+	BannerReply           = product.BannerReply
+	DeleteProductReply    = product.DeleteProductReply
+	DeleteProductReq      = product.DeleteProductReq
+	GetBannerReq          = product.GetBannerReq
+	GetProductListReq     = product.GetProductListReq
+	GetProductReq         = product.GetProductReq
+	IncrementProductReply = product.IncrementProductReply
+	ProductListReply      = product.ProductListReply
+	ProductReply          = product.ProductReply
+	ProductReq            = product.ProductReq
+	UpdateProductReply    = product.UpdateProductReply
 
 	Product interface {
 		//  获取轮播图
@@ -28,6 +33,12 @@ type (
 		GetProduct(ctx context.Context, in *GetProductReq, opts ...grpc.CallOption) (*ProductReply, error)
 		//  获取产品列表
 		GetProductList(ctx context.Context, in *GetProductListReq, opts ...grpc.CallOption) (*ProductListReply, error)
+		//  新增产品
+		IncrementProduct(ctx context.Context, in *ProductReq, opts ...grpc.CallOption) (*IncrementProductReply, error)
+		//  修改产品
+		UpdateProduct(ctx context.Context, in *ProductReq, opts ...grpc.CallOption) (*UpdateProductReply, error)
+		//  删除商品
+		DeleteProduct(ctx context.Context, in *DeleteProductReq, opts ...grpc.CallOption) (*DeleteProductReply, error)
 	}
 
 	defaultProduct struct {
@@ -57,4 +68,22 @@ func (m *defaultProduct) GetProduct(ctx context.Context, in *GetProductReq, opts
 func (m *defaultProduct) GetProductList(ctx context.Context, in *GetProductListReq, opts ...grpc.CallOption) (*ProductListReply, error) {
 	client := product.NewProductClient(m.cli.Conn())
 	return client.GetProductList(ctx, in, opts...)
+}
+
+//  新增产品
+func (m *defaultProduct) IncrementProduct(ctx context.Context, in *ProductReq, opts ...grpc.CallOption) (*IncrementProductReply, error) {
+	client := product.NewProductClient(m.cli.Conn())
+	return client.IncrementProduct(ctx, in, opts...)
+}
+
+//  修改产品
+func (m *defaultProduct) UpdateProduct(ctx context.Context, in *ProductReq, opts ...grpc.CallOption) (*UpdateProductReply, error) {
+	client := product.NewProductClient(m.cli.Conn())
+	return client.UpdateProduct(ctx, in, opts...)
+}
+
+//  删除商品
+func (m *defaultProduct) DeleteProduct(ctx context.Context, in *DeleteProductReq, opts ...grpc.CallOption) (*DeleteProductReply, error) {
+	client := product.NewProductClient(m.cli.Conn())
+	return client.DeleteProduct(ctx, in, opts...)
 }

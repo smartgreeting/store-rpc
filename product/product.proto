@@ -12,7 +12,27 @@ message GetBannerReq {
 message GetProductReq {
     int64 id = 1;   
 }
+message ProductReq {
+    int64 id = 1;
+    int64 detailId = 2;
+    int64 commentId = 3;
+    string url = 4;
+    string des = 5;
+    string name = 6;
+    string shortName = 7;
+    int32 type = 8;
+    string price = 9;
+    int64 sale = 10;
+    int64 inventory = 11;
+    string score = 12;
+    string discount = 13;
+    int32 createdAt = 14;
+    int32 updatedAt = 15;
+}
 message GetProductListReq {}
+message DeleteProductReq {
+    int64 id = 1;
+}
 message Banner {
     int64 id = 1;
     int64  productId = 2;
@@ -21,6 +41,8 @@ message Banner {
     int32 createdAt = 5;
     int32 updatedAt = 6;
 }
+
+
 message ProductReply {
     int64 id = 1;
     int64 detailId = 2;
@@ -44,6 +66,9 @@ message BannerReply {
 message ProductListReply {
     repeated ProductReply list = 1;
 }
+message IncrementProductReply {}
+message UpdateProductReply {}
+message DeleteProductReply {}
 service Product {
 
     // 获取轮播图
@@ -52,5 +77,11 @@ service Product {
     rpc getProduct(GetProductReq)returns(ProductReply);
     // 获取产品列表
     rpc getProductList (GetProductListReq) returns(ProductListReply);
+    // 新增产品
+    rpc incrementProduct (ProductReq)returns(IncrementProductReply);
+    // 修改产品
+    rpc updateProduct (ProductReq)returns(UpdateProductReply);
+    // 删除商品 
+    rpc deleteProduct (DeleteProductReq)returns(DeleteProductReply);
 }
 

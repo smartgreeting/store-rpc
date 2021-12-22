@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-19 15:43:06
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-21 20:25:44
+ * @LastEditTime: 2021-12-22 21:12:37
  * @Email: 17719495105@163.com
  */
 package dao
@@ -26,6 +26,7 @@ func NewProductDao(ctx context.Context, db *gorm.DB) *ProductDao {
 	}
 }
 
+// 获取轮播图
 func (p *ProductDao) GetBanner() ([]*models.Banner, error) {
 	var banner []*models.Banner
 
@@ -34,6 +35,7 @@ func (p *ProductDao) GetBanner() ([]*models.Banner, error) {
 	return banner, err
 }
 
+// 获取商品
 func (p *ProductDao) GetProduct(id int64) (*models.Product, error) {
 
 	var product *models.Product
@@ -41,9 +43,29 @@ func (p *ProductDao) GetProduct(id int64) (*models.Product, error) {
 	return product, err
 }
 
+// 获取商品列表
 func (p *ProductDao) GetProductList() ([]*models.Product, error) {
 
 	var product []*models.Product
 	err := p.db.Find(&product).Error
 	return product, err
+}
+
+// 新增商品
+func (p *ProductDao) IncrementProduct(product *models.Product) error {
+	err := p.db.Create(&product).Error
+	return err
+}
+
+// 更新商品
+func (p *ProductDao) UpdateProduct(product *models.Product) error {
+	err := p.db.Model(&models.Product{}).Where("id = ? AND deleted = ?", product.ID, 0).Updates(&product).Error
+	return err
+}
+
+//删除商品
+func (p *ProductDao) DeleteProduct(id int64) error {
+	err := p.db.Delete(&models.Product{}, id).Error
+
+	return err
 }
