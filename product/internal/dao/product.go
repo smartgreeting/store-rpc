@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-19 15:43:06
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-22 21:12:37
+ * @LastEditTime: 2021-12-23 21:16:46
  * @Email: 17719495105@163.com
  */
 package dao
@@ -59,6 +59,7 @@ func (p *ProductDao) IncrementProduct(product *models.Product) error {
 
 // 更新商品
 func (p *ProductDao) UpdateProduct(product *models.Product) error {
+
 	err := p.db.Model(&models.Product{}).Where("id = ? AND deleted = ?", product.ID, 0).Updates(&product).Error
 	return err
 }

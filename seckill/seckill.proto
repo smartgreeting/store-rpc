@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package seckill;
+
+option go_package = "seckill";
+
+message GetSeckillHomeReq {
+
+}
+message GetSeckillReq {
+    int64  id = 1;
+}
+message GetSeckillHomeReply {
+    int64   id = 1;
+    string  price = 2;
+    string  url = 3;
+}
+
+message GetSeckillHomeListReply {
+    repeated GetSeckillHomeReply list = 1;
+}
+
+message GetSeckillReply {
+    int64   id = 1;
+    string  price = 2;
+    string  url = 3;
+    string  title = 4;
+    bool    isSelf = 5; // 是否自营
+    string  desc = 6;
+    int64   residue = 7; // 剩余
+    string  lowPriceDesc = 8; // eg：30天最低价
+
+}
+message GetSeckillListReply {
+    repeated GetSeckillReply list = 1;
+}
+
+
+service Seckill {
+    // 获取首页秒杀列表
+    rpc getSeckillHomeList(GetSeckillHomeReq) returns(GetSeckillHomeListReply);
+    // 获取秒杀列表
+    rpc getSeckillList(GetSeckillReq) returns(GetSeckillListReply);
+}
