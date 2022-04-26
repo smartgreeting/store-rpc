@@ -8,7 +8,7 @@ import (
 
 	"github.com/smartgreeting/store-rpc/user/user"
 
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
